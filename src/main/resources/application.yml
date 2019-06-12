@@ -1,0 +1,49 @@
+api:
+  name: @project.name@
+  description: @project.description@
+  version: @project.version@
+
+spring:
+
+  profiles:
+    active: dev
+
+  datasource:
+    platform: mysql
+    data: classpath*:db/h2/data.sql
+   # schema: classpath*:db/h2/schema.sql
+    url: jdbc:mysql://localhost:3306/plot_commute_db
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  resources:
+    static-locations: "file:webapp/src/,file:webapp/bower_components/"
+
+  thymeleaf:
+    cache: false
+
+  social:
+    # see https://developers.google.com/+/web/signin/server-side-flow#step_1_create_a_client_id_and_client_secret
+    google:
+      client-id: 499616730185-cj00sg24f5k93i5r8942ce5mkhfl47q7.apps.googleusercontent.com
+      client-secret: PQZFWhcHZs2L720kbZGI6HsL
+
+    # see https://developers.facebook.com/docs/facebook-login/v2.2
+    facebook:
+      client-id: 2046890835420616
+      client-secret: 904ed87742dbab460e077a31e2eb022a
+
+resources:
+  avatar-folder: images/avatars/
+  api-url: ${SOCIAL_NETWORK_API_URL:http://localhost:8080}
+  web-url: ${SOCIAL_NETWORK_WEB_URL:http://localhost:8080}
+
+remember-me:
+  token: SN_REMEMBER_TOKEN
+  cookie: SN_REMEMBER_ME_COOKIE
